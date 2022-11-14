@@ -1,12 +1,30 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const multer = require('multer');
 // create express app
 const app = express();
 app.use(cors());
 // Setup server port
 const port = process.env.PORT || 5000;
-
+var storage = multer.diskStorage(
+  {
+    destination:'./build',
+    filename:function(req,file,cb){
+      cb(null,file.originalname);
+    }
+  }
+);
+const upload = multer({ storage: storage } )
+app.use(express.json());
+// serving front end build files
+app.use(express.static(__dirname + "/../build"));
+// route for file upload
+app.post("/api/uploadfile", upload.single('myFile'), (req, res, next) => {
+  // console.log(req);
+  // console.log(req.file.originalname + " file successfully uploaded !!");
+  res.sendStatus(200);
+});
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
 // parse requests of content-type - application/json
@@ -42,6 +60,10 @@ app.use('/api/v1/users', Users)
 const TransOrder = require('./src/routers/transorder.routes')
 // using as middleware
 app.use('/api/v1/transorder', TransOrder)
+// Require Trans order routes
+const ImageFile = require('./src/routers/imagefile.routes')
+// using as middleware
+app.use('/api/v1/imagefile', ImageFile)
 // listen for requests
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);

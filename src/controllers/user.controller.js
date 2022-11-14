@@ -51,3 +51,13 @@ exports.delete = function (req, res) {
         res.json({ error: false, message: 'User successfully deleted' });
     });
 };
+
+exports.login = function(req,res){
+    const username = req.body.username;
+    const password = req.body.password;
+    User.login(username,password,function(err,user){
+        if(err)
+            res.send(err);
+        res.json(user);
+    })
+}

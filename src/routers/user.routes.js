@@ -11,4 +11,6 @@ router.get('/:id', userall.findById);
 router.put('/:id', userall.update);
 // Delete a employee with id
 router.delete('/:id', userall.delete);
+// Select Login User with username,password
+router.post('/login',userall.login);
 module.exports = router

@@ -4,7 +4,6 @@ var dbConn = require('../../config/db.config');
 var ProductOrder = function (productorder) {
     this.order_no = productorder.order_no;
     this.order_item = productorder.order_item;
-    this.volume = productorder.volume;
     this.point_token = productorder.point_token;
     this.type = productorder.type;
     this.order_date = productorder.order_date;
@@ -52,7 +51,7 @@ ProductOrder.findAll = function (result) {
     });
 };
 ProductOrder.update = function (id, productorder, result) {
-    dbConn.query("UPDATE product_order SET order_no=?,order_item=?,volume=?,point_token=?,type=?,order_date=?,username=?,balance=?,admin_approve=?,point_token_broken=?,approve_date=? WHERE id = ?", [productorder.order_no, productorder.order_item, productorder.volume,productorder.point_token,productorder.type,productorder.order_date,productorder.username,productorder.balance,productorder.admin_approve,productorder.point_token_broken,productorder.approve_date, id], function (err, res) {
+    dbConn.query("UPDATE product_order SET order_no=?,order_item=?,point_token=?,type=?,order_date=?,username=?,balance=?,admin_approve=?,point_token_broken=?,approve_date=? WHERE id = ?", [productorder.order_no, productorder.order_item,productorder.point_token,productorder.type,productorder.order_date,productorder.username,productorder.balance,productorder.admin_approve,productorder.point_token_broken,productorder.approve_date, id], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);

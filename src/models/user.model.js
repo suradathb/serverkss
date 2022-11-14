@@ -8,8 +8,8 @@ var User = function (user) {
     this.hash_keys = user.hash_keys;
     this.types = user.types;
     this.chang_password = user.chang_password;
-    this.created_at = new Date();
-    this.updated_at = new Date();
+    // this.created_at = new Date();
+    // this.updated_at = new Date();
 };
 User.create = function (newUser, result) {
     dbConn.query("INSERT INTO user set ?", newUser, function (err, res) {
@@ -67,4 +67,16 @@ User.delete = function (id, result) {
         }
     });
 };
+
+User.login = function(username,password,result){
+    dbConn.query("Select * from user where username = ? AND password = ? ", [username,password], function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else {
+            result(null, res);
+        }
+    });
+}
 module.exports = User;
