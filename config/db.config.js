@@ -5,7 +5,7 @@ const dbConn = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : '',
-  database : 'kssbc'
+  database : 'posdb'
 });
 dbConn.connect(function(err) {
   if (err) throw err;

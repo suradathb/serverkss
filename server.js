@@ -54,8 +54,14 @@ const productOrders = require('./src/routers/productorder.routes')
 app.use('/api/v1/productorders', productOrders)
 // Require User routes
 const Users = require('./src/routers/user.routes')
+// Require User routes
+const Reservation = require('./src/routers/reservation.routes')
 // using as middleware
-app.use('/api/v1/users', Users)
+app.use('/api/v1/reservation', Reservation)
+// Require User routes
+const ReservationSetting = require('./src/routers/reservationsetting.routes')
+// using as middleware
+app.use('/api/v1/resersetting', ReservationSetting)
 // Require Trans order routes
 const TransOrder = require('./src/routers/transorder.routes')
 // using as middleware
